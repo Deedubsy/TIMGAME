@@ -28,7 +28,10 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (transform.position.x > 16000 && Camera.main.orthographicSize < 2000)
+            Camera.main.orthographicSize += 25;
+        else if (transform.position.x <= 16000 && Camera.main.orthographicSize > 900)
+            Camera.main.orthographicSize -= 25;
     }
 
     void ChangeAnimation(int value)

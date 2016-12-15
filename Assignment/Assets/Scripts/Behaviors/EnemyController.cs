@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     private CircleCollider2D m_boxCollider2D;
     private bool isDead = false;
     private float timeSinceDeath = 0.0f;
+    private float WalkDir = 1;
 
     // Use this for initialization
     void Start()
@@ -21,7 +22,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         if (!isDead)
-            m_Rigidbody2D.velocity = new Vector2(100f, m_Rigidbody2D.velocity.y);
+            Walk();
         else
             m_Rigidbody2D.velocity = new Vector2(0, m_Rigidbody2D.velocity.y);
 
@@ -33,6 +34,17 @@ public class EnemyController : MonoBehaviour
 
         if(timeSinceDeath > 10.0f)
             Destroy(m_Rigidbody2D.gameObject);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+            WalkDir *= -1;
+    }
+
+    void Walk()
+    {
+        m_Rigidbody2D.velocity = new Vector2(100f * WalkDir, m_Rigidbody2D.velocity.y);
     }
 
     void DIE()

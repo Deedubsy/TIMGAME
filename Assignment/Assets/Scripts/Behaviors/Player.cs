@@ -6,11 +6,10 @@ public class Player : MonoBehaviour {
     [SerializeField]
     public float speed = 5f;                    // The fastest the player can travel in the x axis.
     [SerializeField]
-    public float jumpForce = 400f;
+    public float jumpForce = 500f;
 
     public Buttons[] input;
 
-    
     private Rigidbody2D m_Rigidbody2D;
     private InputState inputState;
 
@@ -23,13 +22,6 @@ public class Player : MonoBehaviour {
 
         inputState = GetComponent<InputState>();
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Enemy")
-    //        collision.gameObject.SendMessage("DIE");
-    //}
-       
 
     // Update is called once per frame
     void Update () {
@@ -49,11 +41,6 @@ public class Player : MonoBehaviour {
         }
 
         m_Rigidbody2D.velocity = new Vector2(velX, m_Rigidbody2D.velocity.y);
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    m_Rigidbody2D.AddForce(new Vector2((m_MaxSpeed * Time.deltaTime) * m_MaxSpeed, m_JumpForce));
-        //}
     }
 
     void OnCollisionEnter2D(Collision2D collision)

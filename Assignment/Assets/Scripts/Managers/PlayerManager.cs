@@ -9,7 +9,10 @@ public class PlayerManager : MonoBehaviour
     private Walk walkBehavior;
     private Animator animator;
     private CollisionState collisionState;
+    private Jump jump;
     private CircleCollider2D circleCollider;
+    private float jumpinterval = 0.5f;
+    private bool enemyHit = false;
 
     private void Awake()
     {
@@ -17,6 +20,7 @@ public class PlayerManager : MonoBehaviour
         walkBehavior = GetComponent<Walk>();
         collisionState = GetComponent<CollisionState>();
         circleCollider = GetComponent<CircleCollider2D>();
+        jump = GetComponent<Jump>();
     }
 
     // Use this for initialization
@@ -32,6 +36,22 @@ public class PlayerManager : MonoBehaviour
             Camera.main.orthographicSize += 25;
         else if (transform.position.x <= 16000 && Camera.main.orthographicSize > 900)
             Camera.main.orthographicSize -= 25;
+
+        if (enemyHit)
+        {
+            if (jumpinterval > 0)
+            {
+                if (inputState.GetButtonValue(Buttons.Space))
+                    jump.OnJump();
+            }
+            else
+            {
+                enemyHit = false;
+                jumpinterval = 0.5f;
+            }
+
+            jumpinterval -= Time.deltaTime;
+        }
     }
 
     void ChangeAnimation(int value)
@@ -51,6 +71,8 @@ public class PlayerManager : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy")
         {
+            enemyHit = true;
+
             Vector3 contactPoint = collision.contacts[0].point;
             Vector3 center = circleCollider.bounds.center;
 
@@ -60,11 +82,9 @@ public class PlayerManager : MonoBehaviour
 
             Debug.Log(angle);
 
-            if (angle < -60 && angle > -110) collision.gameObject.SendMessage("DIE");
+            if (angle < -50 && angle > -130) collision.gameObject.SendMessage("DIE");
             else SceneManager.LoadScene(Application.loadedLevel);
             //else Application.LoadLevel(Application.loadedLevel);
-
-
 
             bool right = contactPoint.x > center.x;
             bool left = contactPoint.x < center.x;

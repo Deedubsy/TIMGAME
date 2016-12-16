@@ -3,16 +3,18 @@ using System.Collections;
 
 public class Walk : AbstractBehavoir
 {
-    public float speed = 50f;
+    public float speed = 80f;
     public float runMultiplier = 2f;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
 
         var right = inputState.GetButtonValue(inputButtons[0]);
         var left = inputState.GetButtonValue(inputButtons[1]);
@@ -28,6 +30,8 @@ public class Walk : AbstractBehavoir
 
             body2d.velocity = new Vector2(velX, body2d.velocity.y);
         }
+        else
+            body2d.velocity = new Vector2(0, body2d.velocity.y);
 
     }
 }

@@ -42,46 +42,6 @@ public class CollisionState : MonoBehaviour
         standing = Physics2D.OverlapCircle(pos, collisionRadius, layer);
     }
 
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    //if (collision.gameObject.tag == "Enemy")
-    //    //    collision.gameObject.SendMessage("DIE");
-    //    if (collision.gameObject.tag == "Enemy")
-    //    {
-    //        if (CheckCollisionEnemy(rightPosition, collision.gameObject.layer))
-    //        {
-    //            var a = 0;
-    //        }
-    //        if (CheckCollisionEnemy(leftPosition, collision.gameObject.layer))
-    //        {
-    //            var a = 0;
-    //        }
-    //        if (CheckCollisionEnemy(bottomPosition, collision.gameObject.layer))
-    //        {
-    //            collision.gameObject.SendMessage("DIE");
-    //        }
-    //    }
-    //}
-
-    //public void CheckEnemyCollision(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Enemy")
-    //    {
-    //        if (CheckCollisionEnemy(rightPosition, collision.gameObject.layer))
-    //        {
-
-    //        }
-    //        else if (CheckCollisionEnemy(leftPosition, collision.gameObject.layer))
-    //        {
-
-    //        }
-    //        else if (CheckCollisionEnemy(bottomPosition, collision.gameObject.layer))
-    //        {
-    //            collision.gameObject.SendMessage("DIE");
-    //        }
-    //    }
-    //}
-
     bool CheckCollisionEnemy(Vector2 positionToCheck, LayerMask layer)
     {
         //Standing

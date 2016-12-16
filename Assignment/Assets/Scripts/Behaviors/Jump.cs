@@ -25,7 +25,7 @@ public class Jump : AbstractBehavoir {
         }
 	}
 
-    protected virtual void OnJump()
+    public void OnJump()
     {
         var vel = body2d.velocity;
 
